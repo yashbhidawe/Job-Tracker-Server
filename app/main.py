@@ -1,8 +1,10 @@
 from fastapi import FastAPI
+from app.database import Base, engine
+from app.routes import jobs
+
 
 app = FastAPI()
+app.include_router(jobs.router)
 
 
-@app.get("/")
-async def root():
-    return {"message": "Hello World"}
+Base.metadata.create_all(bind=engine)
