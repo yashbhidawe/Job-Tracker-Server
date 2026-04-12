@@ -14,3 +14,10 @@ def get_jobs(db: Session):
 
 def get_job_by_id(db: Session, job_id: int):
     return db.query(Job).filter(Job.id == job_id).first()
+
+def delete_job(db: Session, job_id: int):
+    job = db.query(Job).filter(Job.id == job_id).first()
+    if job:
+        db.delete(job)
+        db.commit()
+    return job

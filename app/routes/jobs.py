@@ -23,3 +23,8 @@ def get_all(db: Session = Depends(get_db)):
 @router.get("/{job_id}", response_model=schemas.JobResponse)
 def get_by_id(job_id: int, db: Session = Depends(get_db)):
     return crud.get_job_by_id(db, job_id)
+
+
+@router.delete("/{job_id}", response_model=schemas.JobResponse)
+def delete(job_id: int, db: Session = Depends(get_db)):
+    return crud.delete_job(db, job_id)
